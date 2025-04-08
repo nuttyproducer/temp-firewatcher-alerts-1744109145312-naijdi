@@ -1,0 +1,188 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.5rem;
+    
+    /* Custom FireWatcher colors */
+    --fire-50: 20 100% 97%;
+    --fire-100: 15 100% 95%;
+    --fire-200: 12 100% 90%;
+    --fire-300: 14 89% 80%;
+    --fire-400: 12 86% 69%;
+    --fire-500: 10 94% 59%;
+    --fire-600: 9 100% 50%;
+    --fire-700: 10 91% 40%;
+    --fire-800: 9 86% 32%;
+    --fire-900: 8 82% 25%;
+    
+    /* Alert colors */
+    --alert-low: 142 76% 36%;
+    --alert-medium: 38 92% 50%;  
+    --alert-high: 20 90% 50%;
+    --alert-critical: 0 90% 50%;
+    
+    /* Info colors */
+    --info-primary: 215 100% 50%;
+    --info-secondary: 262 100% 60%;
+    
+    /* Safety colors */
+    --safe-primary: 120 100% 35%;
+    --safe-secondary: 160 100% 40%;
+  }
+ 
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263.4 70% 50.4%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* App container */
+  .app-container {
+    @apply min-h-screen bg-background relative;
+  }
+  
+  /* Page container */
+  .page-container {
+    @apply max-w-screen-md mx-auto px-4 py-6;
+  }
+  
+  /* Glass cards */
+  .glass-card {
+    @apply backdrop-blur-sm bg-background/90 border border-border rounded-lg shadow-sm mb-4;
+  }
+  
+  /* Fire card */
+  .fire-card {
+    @apply p-4 glass-card cursor-pointer;
+  }
+  
+  /* Alert badges */
+  .badge-alert {
+    @apply px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .badge-alert-low {
+    @apply bg-[hsl(var(--alert-low)/0.15)] text-[hsl(var(--alert-low))];
+  }
+  
+  .badge-alert-medium {
+    @apply bg-[hsl(var(--alert-medium)/0.15)] text-[hsl(var(--alert-medium))];
+  }
+  
+  .badge-alert-high {
+    @apply bg-[hsl(var(--alert-high)/0.15)] text-[hsl(var(--alert-high))];
+  }
+  
+  .badge-alert-critical {
+    @apply bg-[hsl(var(--alert-critical)/0.15)] text-[hsl(var(--alert-critical))];
+  }
+  
+  /* Bottom navigation */
+  .bottom-navigation {
+    @apply fixed bottom-0 left-0 right-0 bg-background border-t border-border z-10;
+  }
+  
+  .nav-item {
+    @apply flex flex-col items-center p-2 rounded-md text-muted-foreground;
+  }
+  
+  .nav-item.active {
+    @apply text-primary;
+  }
+  
+  /* Animation */
+  @keyframes pulse-alert {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+  
+  .animate-pulse-alert {
+    animation: pulse-alert 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Community features */
+  .community-verification-badge {
+    @apply bg-safe-primary/10 text-safe-primary text-xs px-2 py-0.5 rounded-full flex items-center;
+  }
+  
+  .upvote-button {
+    @apply text-muted-foreground hover:text-primary transition-colors;
+  }
+  
+  .upvote-active {
+    @apply text-primary;
+  }
+  
+  .downvote-button {
+    @apply text-muted-foreground hover:text-alert-high transition-colors;
+  }
+  
+  .downvote-active {
+    @apply text-alert-high;
+  }
+  
+  .chat-message {
+    @apply p-3 rounded-lg max-w-[80%];
+  }
+  
+  .chat-message-user {
+    @apply bg-primary text-primary-foreground ml-auto;
+  }
+  
+  .chat-message-other {
+    @apply bg-muted mr-auto;
+  }
+}
